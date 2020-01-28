@@ -1,5 +1,5 @@
-var path = require('path');
-var convict = require('convict');
+import * as path from "path"
+import * as convict from "convict"
 
 var config = convict(__dirname +'/convict.json')
 if (config.get('env')==='dev') {

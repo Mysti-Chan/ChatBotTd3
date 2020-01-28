@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon --watch \"src/**/*.ts\" --ignore  \"src/**/*.spec.ts\" --exec \"ts-node\" src/index.ts --env \"dev\"",
-    "start:prod": "node ./dist/index.js --env 'prod' --port 3000",
+    "start:prod": "ts-node src/index.ts --env 'prod' --port 3000",
     "compile": "tsc && copyfiles --flat ./src/config/*.json ./dist/config/"
   },
   "author": "",
@@ -18,25 +18,22 @@
     "@types/glob": "^7.1.1",
     "@types/mongoose": "^5.5.34",
     "@types/node": "^12.12.20",
+    "@types/socket.io": "^2.1.4",
     "concurrently": "^5.0.2",
     "nodemon": "^2.0.2",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.3"
   },
   "dependencies": {
-    "@types/socket.io": "^2.1.4",
+    "@types/convict": "^4.2.1",
     "body-parser": "^1.19.0",
     "consolidate": "^0.15.1",
     "convict": "^5.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "glob": "^7.1.6",
-    "html": "^1.0.0",
-    "jade": "^1.11.0",
     "mongoose": "^5.8.1",
-    "mustache": "^3.1.0",
     "socket.io": "^2.3.0",
-    "typeorm": "^0.2.21",
-    "view-helpers": "^0.2.0"
+    "typeorm": "^0.2.21"
   }
 }

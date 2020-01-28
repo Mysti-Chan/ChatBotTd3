@@ -5,7 +5,8 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "strict": false,
-        "module": "commonjs"
+        "module": "CommonJS",
+        "moduleResolution": "Node"
     },
     "include": [
         "src/**/*"

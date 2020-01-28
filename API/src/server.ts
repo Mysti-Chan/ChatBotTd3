@@ -26,12 +26,6 @@ export class Server{
         this.app = express();
         this.socketioServer = new SocketServer(this.app, "PoulpyLePetitSquid")
 
-        this.app.engine('html', consolidate['mustache']);
-        this.app.set('view engine', 'html');
-        // Set views path, template engine and default layout
-        this.app.set('views', __dirname + '/templates');
-
-
         this.app.use(bodyParser.json({
             limit: '50mb',
         }));

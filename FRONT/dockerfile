@@ -1,0 +1,7 @@
+FROM node:10 as build
+
+WORKDIR /usr/src/app
+ADD . /usr/src/app/
+RUN npm i & npm i -g @angular/cli@8.0.1 & npm i -dev @angular-devkit/build-angular
+EXPOSE 4200
+CMD ng serve

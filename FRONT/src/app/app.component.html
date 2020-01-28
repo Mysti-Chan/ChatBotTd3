@@ -17,7 +17,7 @@
   <div class="message-form-container">
     <form [formGroup]="messageForm" (ngSubmit)="onSubmitForm()">
       <mat-form-field>
-        <input matInput placeholder="Your message" formControlName="content">
+        <input matInput placeholder="Your message" formControlName="content" autocomplete="off">
       </mat-form-field>
     
       <button type="submit" mat-raised-button color="primary" [disabled]="!messageForm.valid">Send</button>
