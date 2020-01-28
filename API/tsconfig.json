@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "target": "es6",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "strict": false,
+        "module": "commonjs"
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "typeRoots": [
+        "src/@types",
+        "node_modules/@types"
+      ],
+    "lib": [
+        "es5",
+        "es6"
+    ]
+}

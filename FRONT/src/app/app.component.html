@@ -1,0 +1,26 @@
+
+<mat-toolbar color="primary">
+  <span>Mon beau chat</span>
+</mat-toolbar>
+<div class="container">
+  <div class="message-container" #messagesContainer>
+    <mat-list>
+      <mat-list-item *ngFor="let message of messages last as last">
+        <img matListAvatar src="{{message.avatar}}" alt="...">
+        <h3 matLine class="messageFrom"> {{message.from}} </h3>
+        <span matLine class="messageTime"> {{message.time}} </span>
+        <p matLine class="messageContent">{{message.content}} </p>
+        <mat-divider *ngIf="!last"></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="message-form-container">
+    <form [formGroup]="messageForm" (ngSubmit)="onSubmitForm()">
+      <mat-form-field>
+        <input matInput placeholder="Your message" formControlName="content">
+      </mat-form-field>
+    
+      <button type="submit" mat-raised-button color="primary" [disabled]="!messageForm.valid">Send</button>
+    </form>
+  </div>
+</div>

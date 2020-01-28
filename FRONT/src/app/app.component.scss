@@ -1,0 +1,34 @@
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.container{
+    height: 100%;
+}
+
+.message-container{
+    overflow: auto;
+    height: 70%;
+}
+
+.message-form-container{
+    height: 20%;
+}
+
+.messageContent{
+    white-space: pre-line !important;
+    margin-bottom: 20px !important;
+}
+
+.messageFrom{
+    margin-top: 10px !important;
+}
+
+.mat-list-item-content{
+    margin-bottom: 20;
+}
+
+.mat-list-base .mat-list-item.mat-3-line, .mat-list-base .mat-list-option.mat-3-line{
+    height: auto;
+}
