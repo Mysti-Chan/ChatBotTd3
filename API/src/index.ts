@@ -6,5 +6,8 @@ const Config = require("./config/config");
 
 import { Server } from "./server";
 
-const server = new Server("127.0.0.1",3000,Config.get("db"));
+const server = new Server(
+    process.env["IP"],
+    Number.parseInt(process.env["PORT"]),
+    Config.get("db"));
 server.start();

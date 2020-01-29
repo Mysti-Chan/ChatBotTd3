@@ -20,8 +20,7 @@ export class SocketServer{
         this.serverHttp = new http.Server(app);
         this.io = socketio(this.serverHttp, { origins: '*:*'});
         this.client = [];
-        this.setFlags();
-        
+        this.setFlags();    
     }
 
     private setFlags(){

@@ -1,11 +1,11 @@
 {
     "type": "mongodb",
-    "host": "localhost",
+    "host": "db",
     "port": "27017",
     "username": "",
     "password": "",
     "database": "db_test",
-    "entities": [ "./entity/*.@(js|ts)" ],
+    "entities": [ "/usr/src/app/src/entity/*.@(js|ts)" ],
     "logging": false,
     "synchronize": true,
     "useUnifiedTopology": true

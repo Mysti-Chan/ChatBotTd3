@@ -6,14 +6,7 @@
     "password": "",
     "database": "db_test",
     "entities": [ "./entity/*.@(js|ts)" ],
-    "subscribers": ["./subscriber/*.@(js|ts)"],
     "logging": false,
-    "migrationsTableName": "migrations",
-    "migrations": ["docs/db_migrations/*.ts"],
-    "cli": {
-        "entitiesDir": "./entity",
-        "subscribersDir": "./subscriber",
-        "migrationsDir": "docs/db_migrations"
-    },
+    "synchronize": true,
     "useUnifiedTopology": true
 }

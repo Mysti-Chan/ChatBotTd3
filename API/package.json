@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon --watch \"src/**/*.ts\" --ignore  \"src/**/*.spec.ts\" --exec \"ts-node\" src/index.ts --env \"dev\"",
-    "start:prod": "ts-node src/index.ts --env 'prod' --port 3000",
+    "start:dev": "set PORT=3000 && set IP=localhost && nodemon --watch \"src/**/*.ts\" --ignore  \"src/**/*.spec.ts\" --exec \"ts-node\" src/index.ts --env \"dev\"",
+    "start:prod": "set PORT=3000 && set IP=localhost && ts-node src/index.ts --env 'prod' --port 3000",
+    "start:docker": "nodemon --watch \"src/**/*.ts\" --ignore  \"src/**/*.spec.ts\" --exec \"ts-node\" src/index.ts --env \"docker\"",
     "compile": "tsc && copyfiles --flat ./src/config/*.json ./dist/config/"
   },
   "author": "",
@@ -32,8 +33,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "glob": "^7.1.6",
-    "mongoose": "^5.8.1",
+    "mongoose": "^5.8.10",
     "socket.io": "^2.3.0",
-    "typeorm": "^0.2.21"
+    "typeorm": "^0.2.22"
   }
 }

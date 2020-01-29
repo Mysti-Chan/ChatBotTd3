@@ -2,7 +2,6 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as glob from "glob";
 import * as path from "path";
-import * as consolidate from "consolidate"
 import * as cors from "cors"
 import { createConnection, Connection } from 'typeorm';
 import { SocketServer } from "./SocketServer";
@@ -15,7 +14,6 @@ export class Server{
     private port: number;
     private app: express.Application;
     private dataBaseConfig: any;
-    private botName: string;
     private socketioServer: SocketServer;
 
 
@@ -33,11 +31,6 @@ export class Server{
         this.app.options('*', cors());
 
         this.setRoute();
-        this.setSocket();
-    }
-
-    private setSocket(){
-        
     }
 
     private setRoute(){
@@ -48,12 +41,13 @@ export class Server{
     }
 
     start(){
+        console.log(this.dataBaseConfig);
         createConnection(this.dataBaseConfig).then((connection: Connection) => {
+            console.log(`db Connected on ${this.dataBaseConfig.host}:${this.dataBaseConfig.port}`);
             this.socketioServer.listen(3010,() => {
                 console.log(`socket started on port ${this.host}:3010.`);
             });
             this.app.listen(this.port, () => {
-                console.log(`db Connected on ${this.dataBaseConfig.host}:${this.dataBaseConfig.port}`);
                 console.log(`Server started on port ${this.host}:${this.port}.`);
             });
         });

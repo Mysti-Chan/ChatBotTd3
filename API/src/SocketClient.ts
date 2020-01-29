@@ -2,11 +2,11 @@ import * as socketio from "socket.io";
 import { Message } from "./model/Message.model";
 import { PersonModel } from "./model/Person.model";
 import { SsnModel } from "./model/Ssn.model";
-import { timingSafeEqual } from "crypto";
-import { stringify } from "querystring";
 import { getMongoManager } from "typeorm";
 import { PersonEntity } from "./entity/Person.entity";
+
 //269054958815780
+
 export class Client{
     private botName: string;
     private socket: socketio.Socket;
