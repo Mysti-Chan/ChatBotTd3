@@ -130,7 +130,6 @@ export class Client{
     private savePerson(){
         let entity: PersonEntity = new PersonEntity();
         entity = Object.assign(entity, this.person);
-        console.log(entity);
         return getMongoManager().save(entity);
     }
 }

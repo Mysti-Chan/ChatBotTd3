@@ -3,7 +3,8 @@ FROM node:12
 WORKDIR /usr/src/app
 COPY . /usr/src/app/
 EXPOSE 3000 3010
-ENV PORT=3002
+ENV PORT=3000
 ENV IP=localhost
 RUN npm i
+WORKDIR /usr/src/app/src
 CMD npm run start:docker

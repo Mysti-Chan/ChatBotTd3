@@ -34,14 +34,12 @@ export class Server{
     }
 
     private setRoute(){
-        glob.sync('./routes/*.routes.*s').forEach(route => {
-            console.log("route ok")
+        glob.sync(__dirname + '/routes/*.routes.*s').forEach(route => {
             require(path.resolve(route))(this.app);
         });
     }
 
     start(){
-        console.log(this.dataBaseConfig);
         createConnection(this.dataBaseConfig).then((connection: Connection) => {
             console.log(`db Connected on ${this.dataBaseConfig.host}:${this.dataBaseConfig.port}`);
             this.socketioServer.listen(3010,() => {
