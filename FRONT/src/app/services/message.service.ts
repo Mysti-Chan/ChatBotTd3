@@ -11,43 +11,16 @@ export class MessageService {
 
   private messages: Message[];
   public messagesSubject: Subject<Message[]>;
-  private etapeName: string[]
-  private etape: number
+  private event: string;
 
   constructor(private http: HttpClient,
               private socket: Socket) {
-    this.etapeName = ["nom", "ssn", "verification","sauvegarde","end"];
-    this.etape = 0;
     this.messages = [];
     this.messagesSubject = new Subject();
     this.emitMessages();
 
-    this.socket.fromEvent(this.etapeName[0]).subscribe((data: Message) =>{
-      this.etape = 0
-      data.avatar = "https://i.pinimg.com/originals/2c/8b/ed/2c8bed2ea157922ca65cf5f4ac98d43a.png"
-      this.addMessage(data);
-    });
-
-    this.socket.fromEvent(this.etapeName[1]).subscribe((data: Message) =>{
-      this.etape = 1
-      data.avatar = "https://i.pinimg.com/originals/2c/8b/ed/2c8bed2ea157922ca65cf5f4ac98d43a.png"
-      this.addMessage(data);
-    });
-
-    this.socket.fromEvent(this.etapeName[2]).subscribe((data: Message) =>{
-      this.etape = 2
-      data.avatar = "https://i.pinimg.com/originals/2c/8b/ed/2c8bed2ea157922ca65cf5f4ac98d43a.png"
-      this.addMessage(data);
-    });
-
-    this.socket.fromEvent(this.etapeName[3]).subscribe((data: Message) =>{
-      this.etape = 3
-      data.avatar = "https://i.pinimg.com/originals/2c/8b/ed/2c8bed2ea157922ca65cf5f4ac98d43a.png"
-      this.addMessage(data);
-    });
-
-    this.socket.fromEvent(this.etapeName[4]).subscribe((data: Message) =>{
-      this.etape = 0
+    this.socket.fromEvent("message").subscribe((data: Message) =>{
+      this.event = data.nextEvent;
       data.avatar = "https://i.pinimg.com/originals/2c/8b/ed/2c8bed2ea157922ca65cf5f4ac98d43a.png"
       this.addMessage(data);
     });
@@ -59,8 +32,7 @@ export class MessageService {
 
   public sendMessage(message: Message){
     this.addMessage(message);
-    this.socket.emit(this.etapeName[this.etape], message.content);
-    console.log(this.etape);
+    this.socket.emit(this.event, message.content);
   }
 
   private addMessage(message: Message){

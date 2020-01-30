@@ -17,20 +17,22 @@ export class Client{
         this.botName = botName;
         this.socket = socket;
 
-        this.socket.emit('nom', new Message(
+        this.socket.emit('message', new Message(
             this.botName, 
             `Bonjour, je suis ${this.botName} ! 
             Je peux vous aider à décoder votre SSN !
-            Quel est votre nom ?`
+            Quel est votre nom ?`,
+            "nom",
         ));
 
         this.socket.on("nom", (msg) =>{
             let reg = /^[a-z '-]+$/;
             if(reg.test(msg)){
                 this.setPersonName(msg);
-                this.socket.emit('ssn', new Message(
+                this.socket.emit('message', new Message(
                     this.botName,
-                    "Votre nom a été enregistré. Quel est votre ssn ?"
+                    "Votre nom a été enregistré. Quel est votre ssn ?",
+                    "ssn"
                 ));
             } else {
                 this.error("nom");
@@ -41,12 +43,13 @@ export class Client{
             let reg = /^([1278])(\d{2})(0[1-9]|1[0-2]|62|63)(\d{2}|2[AB])(\d{3})(\d{3})([0-9][0-7])$/
             if(reg.test(msg)){
                 this.setPersonSSn(msg);
-                this.socket.emit('verification', new Message(
+                this.socket.emit('message', new Message(
                     this.botName,
                     `Votre ssn a été enregistré. Voici ses données:
                     ${this.person.ssn.toString()}
                     Les données sont t'elles correctes ?
-                    `
+                    `, 
+                    "verification"
                 ));
             } else {
                 this.error("ssn");
@@ -57,14 +60,16 @@ export class Client{
             let reg = /^oui|non$/i
             if(reg.test(msg)){
                 if(msg === "oui"){
-                    this.socket.emit('sauvegarde', new Message(
+                    this.socket.emit('message', new Message(
                         this.botName,
-                        `Voulez sauvegarder votre résultat dans notre base de données ?`
+                        `Voulez sauvegarder votre résultat dans notre base de données ?`,
+                        'sauvegarde'
                     ));
                 } else{
-                    this.socket.emit('ssn', new Message(
+                    this.socket.emit('message', new Message(
                         this.botName,
-                        `Veuillez rentrer de nouveau votre ssn.`
+                        `Veuillez rentrer de nouveau votre ssn.`,
+                        'ssn'
                     ));
                 }
             } else {
@@ -78,28 +83,31 @@ export class Client{
                 if(msg === "oui"){
                     this.savePerson().then(user => {
                         if(user){
-                            this.socket.emit('end', new Message(
+                            this.socket.emit('message', new Message(
                                 this.botName,
                                 `Vos données ont été sauvegardées dans notre base de donnée ! 
                                 Vous pouvez continuer avec un nouveau SSN. 
-                                Pour cela, tapez de nouveau un nom.`
+                                Pour cela, tapez de nouveau un nom.`,
+                                'nom'
                             ));
                         }else {
 
-                            this.socket.emit('end', new Message(
+                            this.socket.emit('message', new Message(
                                 this.botName,
                                 `Une erreur à eu lieu durant la sauvegarde... Je suis désolé du désagrément. 
                                 Vous pouvez continuer avec un nouveau SSN. 
-                                Pour cela, tapez de nouveau un nom.`
+                                Pour cela, tapez de nouveau un nom.`,
+                                'nom'
                             ));
                         }
                     });
                 } else{
-                    this.socket.emit('end', new Message(
+                    this.socket.emit('message', new Message(
                         this.botName,
                         `Vos données n'ont pas été sauvegardées dans notre base de donnée. 
                         Vous pouvez continuer avec un nouveau SSN.
-                        Pour cela, tapez de nouveau un nom.`
+                        Pour cela, tapez de nouveau un nom.`,
+                        'nom'
                     ));
                 }
             } else {
@@ -120,10 +128,11 @@ export class Client{
         this.person = new PersonModel(data[0],data[1]);
     }
 
-    private error(flag: string){
-        this.socket.emit(flag, new Message(
+    private error(event: string){
+        this.socket.emit("message", new Message(
             this.botName,
-            "Je ne comprends pas votre réponse. Pouvez vous recommencer ?"
+            "Je ne comprends pas votre réponse. Pouvez vous recommencer ?",
+            event
         ));
     }
 
